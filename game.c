@@ -28,8 +28,7 @@ int c05 = 200;
 
 /* make save file */
 int
-save(void)
-{
+save(void){
 	FILE *save = fopen("save", "w");
 	if(save==NULL)
 		return 1;
@@ -45,8 +44,7 @@ save(void)
 
 /* use save file */
 int
-load(void)
-{
+load(void){
 	FILE *save = fopen("save", "r");
 	if(save==NULL)
 		return 1;
@@ -62,8 +60,7 @@ load(void)
 
 /* wipe save file */
 int
-reset(void)
-{
+reset(void){
 	FILE *save = fopen("save", "w");
 	if(save==NULL)
 		return 1;
@@ -80,8 +77,7 @@ reset(void)
 
 /* show intro message asking for a username */
 int
-intro(void)
-{
+intro(void){
 	puts("\e[1;1H\e[2J\n"
 		"      Welcome!\n  What's your name?");
 	scanf("%s",name);
@@ -90,8 +86,7 @@ intro(void)
 
 /* let user pick a type to play */
 int
-pick_type(void)
-{
+pick_type(void){
 	printf("what type are you %s? (this does nothing as of now)\n",name);
 	puts("magic(a):ranged(b):melee(c)");
 	for(;;){
@@ -115,8 +110,7 @@ pick_type(void)
 
 /* show user stats */
 int
-stats(void)
-{
+stats(void){
 	printf("%d ",xp);
 	printf("%da:",m01);
 	printf("%db:",m02);
@@ -132,8 +126,7 @@ stats(void)
 
 /* show multiplier prices */
 int
-cost(void)
-{
+cost(void){
 	printf("cost ");
 	printf("%da:",c01);
 	printf("%db:",c02);
@@ -149,8 +142,7 @@ cost(void)
 
 /* for buying multiplier upgrades */
 int
-up(void)
-{
+up(void){
 	char c = '\0';
 	for(;;){
 		int i = 0;
@@ -213,8 +205,7 @@ up(void)
 
 /* let user pick an action */
 int
-pick(void)
-{
+pick(void){
 	char c = '\0';
 	scanf("%c",&c);
 	switch(c){
@@ -249,8 +240,7 @@ pick(void)
 
 /* thread which automatically gains xp */
 void *
-auto_xp(void *vargp)
-{
+auto_xp(void *vargp){
 	pthread_detach(pthread_self());
 	for(t=0; quit<1; ++t){
 		xp += m01;
@@ -268,8 +258,7 @@ auto_xp(void *vargp)
 }
 
 int
-main(void)
-{
+main(void){
 	pthread_t tid;
 	load();
 	intro();
