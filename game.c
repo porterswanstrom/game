@@ -3,28 +3,28 @@
 #include <unistd.h>
 #include <pthread.h>
 
+int quit = 0;
 char name[17];
 char type = '\0';
-int quit = 0;
 int xp = 0;
 
 /* ticks and tick speed */
-int ts = 1;
 int t = 0;
+int ts = 1;
 
 /* multipliers */
-int ma = 1;
-int mb = 0;
-int mc = 0;
-int md = 0;
-int me = 0;
+int m01 = 1;
+int m02 = 0;
+int m03 = 0;
+int m04 = 0;
+int m05 = 0;
 
 /* costs */
-int ca = 10;
-int cb = 30;
-int cc = 50;
-int cd = 100;
-int ce = 200;
+int c01 = 10;
+int c02 = 30;
+int c03 = 50;
+int c04 = 100;
+int c05 = 200;
 
 int
 load(void)
@@ -33,11 +33,11 @@ load(void)
 	if(save==NULL)
 		return 1;
 	fscanf(save,"%d\n",&xp);
-	fscanf(save,"%d\n",&ma);
-	fscanf(save,"%d\n",&mb);
-	fscanf(save,"%d\n",&mc);
-	fscanf(save,"%d\n",&md);
-	fscanf(save,"%d\n",&me);
+	fscanf(save,"%d\n",&m01);
+	fscanf(save,"%d\n",&m02);
+	fscanf(save,"%d\n",&m03);
+	fscanf(save,"%d\n",&m04);
+	fscanf(save,"%d\n",&m05);
 	fclose(save);
 	return 0;
 }
@@ -49,11 +49,11 @@ save(void)
 	if(save==NULL)
 		return 1;
 	fprintf(save,"%d\n",xp);
-	fprintf(save,"%d\n",ma);
-	fprintf(save,"%d\n",mb);
-	fprintf(save,"%d\n",mc);
-	fprintf(save,"%d\n",md);
-	fprintf(save,"%d\n",me);
+	fprintf(save,"%d\n",m01);
+	fprintf(save,"%d\n",m02);
+	fprintf(save,"%d\n",m03);
+	fprintf(save,"%d\n",m04);
+	fprintf(save,"%d\n",m05);
 	fclose(save);
 	return 0;
 }
@@ -98,13 +98,13 @@ pick_type(void)
 				++quit;
 				return 0;
 			case 'a':
-				puts("you are a magic type");
+				puts("you're a magic type");
 				return 0;
 			case 'b':
-				puts("you are a ranged type");
+				puts("you're a ranged type");
 				return 0;
 			case 'c':
-				puts("you are a melee type");
+				puts("you're a melee type");
 				return 0;
 		}
 	}
@@ -115,14 +115,14 @@ int
 stats(void)
 {
 	printf("%d ",xp);
-	printf("%da:",ma);
-	printf("%db:",mb);
-	if(mb>0)
-		printf("%dc:",mc);
-	if(mc>0)
-		printf("%dd:",md);
-	if (md>0)
-		printf("%de",me);
+	printf("%da:",m01);
+	printf("%db:",m02);
+	if(m02>0)
+		printf("%dc:",m03);
+	if(m03>0)
+		printf("%dd:",m04);
+	if(m04>0)
+		printf("%de",m05);
 	puts("");
 	return 0;
 }
@@ -132,14 +132,14 @@ int
 cost(void)
 {
 	printf("cost ");
-	printf("%da:",ca);
-	printf("%db:",cb);
-	if(mb>0)
-		printf("%dc:",cc);
-	if(mc>0)
-		printf("%dd:",cd);
-	if (md>0)
-		printf("%de",ce);
+	printf("%da:",c01);
+	printf("%db:",c02);
+	if(m02>0)
+		printf("%dc:",c03);
+	if(m03>0)
+		printf("%dd:",c04);
+	if (m04>0)
+		printf("%de",c05);
 	puts("");
 	return 0;
 }
@@ -165,41 +165,41 @@ up(void)
 				cost();
 				break;
 			case 'a':
-				while(xp>ca){
-					++ma;
-					xp -= ca;
+				while(xp>c01){
+					++m01;
+					xp -= c01;
 					++i;
 				}
 				printf("bought %d layer(%c) upgrades\n",i,c);
 				break;
 			case 'b':
-				while(xp>cb){
-					++mb;
-					xp -= cb;
+				while(xp>c02){
+					++m02;
+					xp -= c02;
 					++i;
 				}
 				printf("bought %d layer(%c) upgrades\n",i,c);
 				break;
 			case 'c':
-				while(xp>cc){
-					++mc;
-					xp -= cc;
+				while(xp>c03){
+					++m03;
+					xp -= c03;
 					++i;
 				}
 				printf("bought %d layer(%c) upgrades\n",i,c);
 				break;
 			case 'd':
-				while(xp>cd){
-					++md;
-					xp -= cd;
+				while(xp>c04){
+					++m04;
+					xp -= c04;
 					++i;
 				}
 				printf("bought %d layer(%c) upgrades\n",i,c);
 				break;
 			case 'e':
-				while(xp>ce){
-					++me;
-					xp -= ce;
+				while(xp>c05){
+					++m05;
+					xp -= c05;
 					++i;
 				}
 				printf("bought %d layer(%c) upgrades\n",i,c);
@@ -250,15 +250,15 @@ auto_xp(void *vargp)
 {
 	pthread_detach(pthread_self());
 	for(t=0; quit<1; ++t){
-		xp += ma;
+		xp += m01;
 		if(t % 5 == 0)
-			ma += mb;
+			m01 += m02;
 		if(t % 10 == 0)
-			mb += mc;
+			m02 += m03;
 		if(t % 20 == 0)
-			mc += md;
+			m03 += m04;
 		if(t % 30 == 0)
-			md += me;
+			m04 += m05;
 		sleep(ts);
 	}
 	pthread_exit(NULL);
