@@ -26,22 +26,7 @@ int c03 = 50;
 int c04 = 100;
 int c05 = 200;
 
-int
-load(void)
-{
-	FILE *save = fopen("save", "r");
-	if(save==NULL)
-		return 1;
-	fscanf(save,"%d\n",&xp);
-	fscanf(save,"%d\n",&m01);
-	fscanf(save,"%d\n",&m02);
-	fscanf(save,"%d\n",&m03);
-	fscanf(save,"%d\n",&m04);
-	fscanf(save,"%d\n",&m05);
-	fclose(save);
-	return 0;
-}
-
+/* make save file */
 int
 save(void)
 {
@@ -58,6 +43,24 @@ save(void)
 	return 0;
 }
 
+/* use save file */
+int
+load(void)
+{
+	FILE *save = fopen("save", "r");
+	if(save==NULL)
+		return 1;
+	fscanf(save,"%d\n",&xp);
+	fscanf(save,"%d\n",&m01);
+	fscanf(save,"%d\n",&m02);
+	fscanf(save,"%d\n",&m03);
+	fscanf(save,"%d\n",&m04);
+	fscanf(save,"%d\n",&m05);
+	fclose(save);
+	return 0;
+}
+
+/* wipe save file */
 int
 reset(void)
 {
@@ -75,17 +78,17 @@ reset(void)
 	return 0;
 }
 
-/* show an intro message and ask the user for their name */
+/* show intro message asking for a username */
 int
 intro(void)
 {
 	puts("\e[1;1H\e[2J\n"
-		"      welcome!\n  what's your name?");
+		"      Welcome!\n  What's your name?");
 	scanf("%s",name);
 	return 0;
 }
 
-/* let the user pick a type to play as */
+/* let user pick a type to play */
 int
 pick_type(void)
 {
@@ -110,7 +113,7 @@ pick_type(void)
 	}
 }
 
-/* show the user's stats */
+/* show user stats */
 int
 stats(void)
 {
@@ -208,7 +211,7 @@ up(void)
 	}
 }
 
-/* let the user pick an action */
+/* let user pick an action */
 int
 pick(void)
 {
@@ -244,7 +247,7 @@ pick(void)
 	return 0;
 }
 
-/* thread that automatically gains xp */
+/* thread which automatically gains xp */
 void *
 auto_xp(void *vargp)
 {
