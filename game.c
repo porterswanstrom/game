@@ -80,7 +80,7 @@ int
 intro(void)
 {
 	puts("\e[1;1H\e[2J\n"
-		"      Welcome!\n  What's your name?");
+		"      welcome!\n  what's your name?");
 	scanf("%s",name);
 	return 0;
 }
@@ -89,7 +89,7 @@ intro(void)
 int
 pick_type(void)
 {
-	printf("What type are you %s?\n",name);
+	printf("what type are you %s? (this does nothing as of now)\n",name);
 	puts("magic(a):ranged(b):melee(c)");
 	for(;;){
 		scanf("%c",&type);
@@ -98,13 +98,13 @@ pick_type(void)
 				++quit;
 				return 0;
 			case 'a':
-				puts("You are a magic type");
+				puts("you are a magic type");
 				return 0;
 			case 'b':
-				puts("You are a ranged type");
+				puts("you are a ranged type");
 				return 0;
 			case 'c':
-				puts("You are a melee type");
+				puts("you are a melee type");
 				return 0;
 		}
 	}
@@ -155,13 +155,13 @@ up(void)
 		scanf("%c",&c);
 		switch(c){
 			case '.':
-				puts("Main Menu");
+				puts("main menu");
 				return 0;
 			case ',':
 				stats();
 				break;
 			case '?':
-				puts("Upgrades");
+				puts("upgrades");
 				cost();
 				break;
 			case 'a':
@@ -170,7 +170,7 @@ up(void)
 					xp -= ca;
 					++i;
 				}
-				printf("Bought %d Layer(%c) upgrades\n",i,c);
+				printf("bought %d layer(%c) upgrades\n",i,c);
 				break;
 			case 'b':
 				while(xp>cb){
@@ -178,7 +178,7 @@ up(void)
 					xp -= cb;
 					++i;
 				}
-				printf("Bought %d Layer(%c) upgrades\n",i,c);
+				printf("bought %d layer(%c) upgrades\n",i,c);
 				break;
 			case 'c':
 				while(xp>cc){
@@ -186,7 +186,7 @@ up(void)
 					xp -= cc;
 					++i;
 				}
-				printf("Bought %d Layer(%c) upgrades\n",i,c);
+				printf("bought %d layer(%c) upgrades\n",i,c);
 				break;
 			case 'd':
 				while(xp>cd){
@@ -194,7 +194,7 @@ up(void)
 					xp -= cd;
 					++i;
 				}
-				printf("Bought %d Layer(%c) upgrades\n",i,c);
+				printf("bought %d layer(%c) upgrades\n",i,c);
 				break;
 			case 'e':
 				while(xp>ce){
@@ -202,7 +202,7 @@ up(void)
 					xp -= ce;
 					++i;
 				}
-				printf("Bought %d Layer(%c) upgrades\n",i,c);
+				printf("bought %d layer(%c) upgrades\n",i,c);
 				break;
 		}
 	}
@@ -222,7 +222,7 @@ pick(void)
 			stats();
 			break;
 		case '?':
-			puts("Main Menu");
+			puts("main menu");
 			puts("quit(.):stats(,):save(s):load(l):reset(r):upgrades(u)");
 			break;
 		case 's':
@@ -235,7 +235,7 @@ pick(void)
 			reset();
 			break;
 		case 'u':
-			puts("Upgrades");
+			puts("upgrades");
 			up();
 			break;
 		default:
@@ -276,7 +276,7 @@ main(void)
 	while(quit<1)
 		pick();
 	save();
-	puts("Saving and exiting");
+	puts("saving and exiting");
 	pthread_exit(NULL);
 	return 0;
 }
