@@ -6,5 +6,8 @@ all:
 install:
 	mkdir -p ${BINDIR}
 	cp ${BIN} ${BINDIR}/
+uninstall:
+	rm -f ${BINDIR}/${BIN}
+deinstall: uninstall
 clean:
 	rm -f ${BIN}
